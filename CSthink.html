@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Think like a Computer Scientist</title>
+	<link rel=stylesheet type="text/css" href="jaimeBasic.css">
+</head>
+
+<body>
+<article>
+<h1>Think like a Computer Scientist</h1>
+Jaime Silvela, 2005
+<p>
+I’ve always been fond of mathematics. For a couple of years I searched for good popularization books but generally ran to the same experience: these books would have lots of multicolor pictures of fractals, or deal with cool-sounding topics such as chaos, but would not reproduce the mindset of the mathematician, which is achieved after many exercises with arithmetic, calculus, geometry, logic or theorem proving.
+</p><p>
+Through some twists of fate I’ve ended up getting into Computer Science, and I see some of the same problems here. Books popularizing Computer Science generally talk about artificial intelligence, Turing tests, artificial life or neural networks. These topics, however, occupy a tiny group of computer scientists (and attract a great deal of crackpots from many disciplines) and do not represent the basic mindset of the programmer.
+This essay is my attempt to explain how Computer Scientists think.
+</p><p>
+So let’s begin with a problem. Imagine that you’re given a maze, in which there is a mouse and a piece of cheese, and you want the computer to find the shortest path the mouse can take to get to the cheese.
+</p>
+<div align="center">
+<img src="mouse-maze.png" alt="a mouse in a maze">
+</div>
+<p>
+First of all, you need to remember that a computer is basically a calculator with memory. How do you express a maze, a mouse, and cheese?
+Computer memory is just a sequence of storage spaces. On each space you can put a number. Everything can be represented as a number. For instance, in our maze, we could represent a <q>walkable</q> space with the number 0, a wall with the number 1, and cheese with the number 2.  Our previous drawing is now:
+</p>
+<div align="center">
+<img src="digits.png" alt="everything is a number">
+</div>
+<p>
+Computer memory is sequential, not bidimensional, so a more accurate representation would put all these numbers on a single line. Usually, computer memory is represented as a column of boxes, with the beginning at the top.
+Let’s put the bidimensional arrangement of numbers into memory going row by row, from left to right, from top to bottom. This is called <q>row-major order</q>. Also, we need to keep track of the mouse’s position. To do that, we use a <em>variable</em>, whose value will be itself kept in memory. Actually, it will most likely be stored in a <em>register</em>, which is a piece of fast memory used for commonly accessed data. This variable will point to the memory location of the mouse’s position. All memory positions on a computer are identified by a number, the memory address. So, to sum things up, we’ll keep the maze in memory, and we’ll keep the memory address of the mouse’s current position in a register. Here’s the result:
+</p>
+<div align="center">
+<img src="equiv.png" alt="how memory is">
+</div>
+<p>
+Anyway, this takes us too far. It’s generally useful to think of data in the abstract rather than as a column of numbers. My purpose in showing this to you was to illustrate what programmers consciously or unconsciously take for granted: <em>Anything can be represented on a computer. Everything can be expressed as a column of numbers</em>.
+</p><p>
+So let’s continue. To make things interesting, our mouse doesn’t move except when it’s given direct orders. It can recognize only one order: MOVE, which can be up, down, left or right (like so: <q>MOVE(up)</q>).
+Now you can start to move it. It would be easy, right?
+</p>
+<div align="center">
+<table>
+<tr>
+<td><div>
+MOVE(down)<br>
+MOVE(right)<br>
+MOVE(right)
+</div></td><td><img src="mouse-move.png" alt="moving the mouse"></td>
+</tr>
+</table>
+</div>
+<p>
+However, at this point we start to run into problems. Do we move the mouse up or right? In this particular maze, it’s easy to see that the mouse needs to go right, but we could have substantially more complicated mazes, and we might not even know what the maze is going to be like. For instance, we could write a program that someone else will use on their maze. We need a general strategy.
+</p><p>
+If you were solving this maze yourself, you’d probably trace the routes with a pen, and go back to the last <q>fork</q> in the maze when you run into a dead end. We can do better than that. Instead of following a route until we reach a dead end, with  a computer we can follow several paths at the same time. How do we do that? With memory!
+</p><p>
+In the previous image we had arrived at a fork in the path, and we could go to the square above or to the square to the right. Instead of choosing one of them, we could store <em>both</em> squares as possible continuations. Let’s set aside an area of memory to keep them. For reasons that will soon become apparent, we’ll call it the <q>queue</q>. Now comes the smart part: for each square stored in the queue, we look at all the next possible continuations reachable from it, and add them to the queue. To be precise, we add them at the end of the queue (hence the name). Let’s see how this works in practice:
+</p>
+<div align="center">
+<img src="bfs.png" alt="searching a path">
+</div>
+<p>
+To reiterate: we place a square on the queue, and assign it to be the <em>top</em> of the queue. Then we put its neighboring squares at the end of the queue, and we advance the <em>top</em> to the next square in the queue. We place its neighbors at the end of the queue, advance the <em>top</em> to the next square in the queue, and so on and so forth until we come to the square that contains the cheese.
+</p><p>
+Kewl, I hear you say, but so what? Well, we’re in essence cloning the mouse into several little mice who each explore a path. It can be demonstrated mathematically that the first <q>cloned mouse</q> to find the cheese will have taken the least possible number of steps. Nifty, no? Just to make things a bit more clear, we’re going to add an extra refinement. When we add squares to the queue, we’re going to label them to indicate how many steps have been taken to reach them. This is pretty easy: for instance, if the top of the queue has a label of <q>5</q>, then when we add its neighbors we will label all of them with <q>6</q>.<br>
+Now let’s look at a full run until the mouse finds the cheese:
+</p>
+<div align="center">
+<img src="full-run.png" alt="a full run">
+</div>
+<p>
+As a final step, the path we were looking for can be found by retracing the steps backwards from the cheese in descending order of the labels:
+</p>
+<div align="center">
+<img src="path.png" alt="final result">
+</div>
+<p>
+The program to be fed to the computer would be something like:
+</p>
+<ol>
+<li>Place the initial mouse square on a queue.
+<li>Label it with "0" and make this the top of the queue.
+<li>While the top of the queue is not a square containing cheese:
+<ol>
+	<li>Add to the end of the queue the possible continuations from the top square.
+	<li>Label them with one plus the label of the top of the queue.
+	<li>Advance the top of the queue to the next element in the queue.
+</ol>
+<li>Retrace back from the square with cheese in order of descending labels
+</ol>
+<p>
+And that’s it for mice and cheese. What you have just learned is one of the basic techniques of Computer Science, called <q>Breadth-First Search</q>. If you’ve gotten the hang of it with just one reading, pat yourself on the back. Hell, pat me on the back too. It’s one of the stumbling blocks for many beginners in CS, and it is at the base of many other techniques. Queues are in widespread use in computer programs. Take the ability to <q>clone mice</q> that the queue gave us. Think of operating systems like Windows or Mac, which give you the impression that the computer is doing several things at once, or that there are several little cloned machines, one for email, one for Word, etc. Well, queues are very important in simulating this multitasking ability. Just for the record, computers (unless they have dual processors) can do only one thing at a time, and that is simply to perform a calculation. Isn’t it wonderful that this seemingly terrible restriction has been so well tackled?
+</p><p>
+To finish, I’d like to give you my favorite quote about Computer Science, by a famous dutch computer scientist named Edsger Dijkstra: <em>The question of whether computers can think is like the questions of whether submarines can swim.</em>
+</p><p>
+If you’re interested, you can’t to better than getting a copy of <em>Structure and Interpretation of Computer Programs</em>, By Harold Abelson and Gerald Jay Sussman, MIT Press 1996
+</p>
+</article>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-55574525-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>
