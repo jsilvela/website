@@ -4,7 +4,7 @@ body {
 	margin-top: 3em;
 	margin-bottom: 3em;
 	max-width: 36em;
-	font-family: "Bitstream Vera Serif", "DejaVu Serif", Verdana, sans-serif;
+	font-family: "Fira Sans", Verdana, sans-serif;
 	text-rendering: optimizeLegibility;
 }
 
@@ -51,7 +51,7 @@ em {
 }
 
 tt, code {
-	font-family: "fira mono", "Bitstream Vera Sans Mono", "DejaVu Sans Mono", Menlo, monospace;
+	font-family: "fira mono", "DejaVu Sans Mono", Menlo, monospace;
 }
 
 div.note {
