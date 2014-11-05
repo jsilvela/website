@@ -1,8 +1,9 @@
+html {
+	font-size: 14px;
+}
+
 body {
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 3em;
-	margin-bottom: 3em;
+	margin: 3em 10%;
 	max-width: 36em;
 	font-family: "Fira Sans", Verdana, sans-serif;
 	text-rendering: optimizeLegibility;
@@ -14,10 +15,10 @@ body {
 		background: #fcfcfc;
 	}
 	body, h2, h3 {
-		font-size: medium;
+		font-size: 1.4em;
 	}
 	h1 {
-		font-size: large;
+		font-size: 1.6em;
 	}
 }
 
@@ -50,7 +51,7 @@ em {
 	font-style: italic;
 }
 
-tt, code {
+pre, tt, code {
 	font-family: "fira mono", "DejaVu Sans Mono", Menlo, monospace;
 }
 
