@@ -14,7 +14,7 @@ body {
 		color: #111;
 		background: #fafafa;
 	}
-	body, h2, h3 {
+	h2, h3 {
 		font-size: 1.1em;
 	}
 	h1 {
