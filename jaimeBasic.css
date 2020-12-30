@@ -1,20 +1,8 @@
-@media screen {html {font-size: 23px;}}
-@media screen and (max-width:1000px){html {font-size: 22px;}}
-@media screen and (max-width:760px){html {font-size: 19px;}}
-@media screen and (max-width:520px){html {font-size: 18px;}}
-
-body {
-	margin: 3em auto;
-	max-width: 36em;
-	width: 90%;
-	font-family: Georgia, Charter, serif;
-	text-rendering: optimizeLegibility;
-}
-
 @media screen {
 	body {
-		color: #111;
+		color: #303030;
 		background: #fafafa;
+		font-size: 21px;
 	}
 	h2, h3 {
 		font-size: 1.1em;
@@ -37,13 +25,22 @@ body {
 	}
 }
 
+body {
+	margin: 3em auto;
+	max-width: 36em;
+	width: 90%;
+	font-family: Charter, "Bitstream Charter", Georgia, serif;
+	text-rendering: optimizeLegibility;
+}
+
 h1, h2, h3 {
 	font-weight: 700;
 }
 
 li {
 	margin-bottom: 0.7em;
-	line-height: 1.4;}
+	line-height: 1.4;
+}
 
 p, q {
 	line-height: 1.55;
@@ -54,7 +51,7 @@ em {
 }
 
 pre, tt, code {
-	font-family: Consolas, "DejaVu Sans Mono", Menlo, monospace;
+	font-family: Consolas, Menlo, "DejaVu Sans Mono",monospace;
 }
 
 div.note {

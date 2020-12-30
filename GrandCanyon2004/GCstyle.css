@@ -1,20 +1,8 @@
-@media screen {html {font-size: 23px;}}
-@media screen and (max-width:1000px){html {font-size: 23px;}}
-@media screen and (max-width:760px){html {font-size: 20px;}}
-@media screen and (max-width:720px){html {font-size: 19px;}}
-@media screen and (max-width:520px){html {font-size: 18px;}}
-
-body {
-	margin: 3em auto;
-	max-width: 36em;
-	width: 90%;
-	font-family: Georgia, "DejaVu Serif", serif;
-}
-
 @media screen {
 	body {
-		color: #111;
+		color: #303030;
 		background: #fafafa;
+		font-size: 21px;
 	}
 	h2, h3 {
 		font-size: 1.1em;
@@ -37,6 +25,13 @@ body {
 	}
 }
 
+body {
+	margin: 3em auto;
+	max-width: 36em;
+	width: 90%;
+	font-family: Charter, "Bitstream Charter", Georgia, "DejaVu Serif", serif;
+}
+
 p, ul {
 	text-indent: 0em;
 	margin-top: 0.5em;
@@ -47,7 +42,7 @@ p, ul {
 h1, h2, h3, h4 {
 	font-weight: 700;
 	margin-top: 1.5em;
-	font-family: Calibri, Lucida, sans-serif;
+	font-family: Calibri, Lucida, "DejaVu Sans", sans-serif;
 }
 
 tt, code {
