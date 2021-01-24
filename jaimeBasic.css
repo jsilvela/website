@@ -2,7 +2,7 @@
 	body {
 		color: #303030;
 		background: #fafafa;
-		font-size: 21px;
+		font-size: 20px;
 	}
 	h2, h3 {
 		font-size: 1.1em;
@@ -16,25 +16,50 @@
 	body {
 		color: black;
 		background: white;
-	}
-	body, h2, h3 {
 		font-size: 10pt;
 	}
-	h1 {
+	h2, h3 {
 		font-size: 11pt;
 	}
+	h1 {
+		font-size: 12pt;
+	}
+}
+
+@font-face{
+	font-family: 'Source Sans Pro';
+	font-weight: 700;
+	font-style: normal;
+	font-stretch: normal;
+	src: url('fonts/SourceSansPro-Bold.otf.woff') format('woff');
+}
+
+@font-face{
+	font-family: 'Source Serif Pro';
+	font-weight: 400;
+	font-style: normal;
+	font-stretch: normal;
+	src: url('fonts/SourceSerifPro-Regular.otf.woff') format('woff');
+}
+
+@font-face{
+	font-family: 'Source Serif Pro';
+	font-weight: 400;
+	font-style: italic;
+	font-stretch: normal;
+	src: url('fonts/SourceSerifPro-It.otf.woff') format('woff');
 }
 
 body {
 	margin: 3em auto;
 	max-width: 36em;
 	width: 90%;
-	font-family: Charter, "Bitstream Charter", Georgia, serif;
-	text-rendering: optimizeLegibility;
+	font-family: "source serif pro", Georgia, Charter, "Bitstream Charter", serif;
 }
 
 h1, h2, h3 {
 	font-weight: 700;
+	font-family: "source sans pro", verdana, sans-serif;
 }
 
 li {
@@ -51,7 +76,7 @@ em {
 }
 
 pre, tt, code {
-	font-family: Consolas, Menlo, "DejaVu Sans Mono",monospace;
+	font-family: Consolas, Menlo, "DejaVu Sans Mono", monospace;
 }
 
 div.note {
